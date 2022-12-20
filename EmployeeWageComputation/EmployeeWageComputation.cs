@@ -7,8 +7,10 @@
             Console.WriteLine("Welcome to Employee Wage Computation Program!");
             const int present = 1;
             const int wagePerHr = 20;
+            const int daysPerMonth = 20;
             int fullDayHrs = 0;
             int partTimeHrs = 0;
+            int absentCounter = 0;
             Random random = new Random();
 
 
@@ -18,44 +20,56 @@
             switch (userChoice)
             {
                 case 1:
-                    //UC1 Check employee is present or absent using RANDOM
-                    int fullTimeEmployee = random.Next(0, 2);
-                    if (fullTimeEmployee == present)
-                    {
-                        Console.WriteLine("The employee is present.");
 
-                        fullDayHrs += 8;
-                    }
-                    else
+                    for (int day =1; day <= daysPerMonth; day ++) //UC5 Calculating wages for a month 
                     {
-                        Console.WriteLine("The Employee is absent.");
+                        //UC1 Check employee is present or absent using RANDOM
+                        int fullTimeEmployee = random.Next(0, 2);
+                        if (fullTimeEmployee == present)
+                        {
+                            //Console.WriteLine("The employee is present.");
 
-                        fullDayHrs += 0;
+                            fullDayHrs += 8;
+                        }
+                        else
+                        {
+                            //Console.WriteLine("The Employee is absent.");
+
+                            fullDayHrs += 0;
+                            absentCounter++;
+                        }
                     }
 
                     //UC2 Calculate daily employee wage
                     int fullTimeWage = wagePerHr * fullDayHrs;
-                    Console.WriteLine("Total wage is : " + fullTimeWage);
+                    Console.WriteLine("Full-time employee is absent for {0} day(s), total wage after deduction is {1}.", absentCounter, fullTimeWage);
+
                     break;
 
                 case 2:
-                    //UC3 Add part time employee & wage
-                    int partTimeEmployee = random.Next(0, 2);
-                    if (partTimeEmployee == present)
-                    {
-                        Console.WriteLine("The part-time employee is present.");
 
-                        partTimeHrs += 4;
-                    }
-                    else
+                    for (int day = 1; day <= daysPerMonth; day++) //UC5 Calculating wages for a month
                     {
-                        Console.WriteLine("The part-time employee is absent.");
+                        //UC3 Add part time employee & wage
+                        int partTimeEmployee = random.Next(0, 2);
+                        if (partTimeEmployee == present)
+                        {
+                            //Console.WriteLine("The part-time employee is present.");
 
-                        partTimeHrs += 0;
+                            partTimeHrs += 4;
+                        }
+                        else
+                        {
+                            //Console.WriteLine("The part-time employee is absent.");
+
+                            partTimeHrs += 0;
+                            absentCounter++;
+                        }
                     }
 
                     int partTimeWage = wagePerHr * partTimeHrs;
-                    Console.WriteLine("Total wage is : " + partTimeWage);
+                    Console.WriteLine("Part-time employee is absent for {0} day(s), total wage after deduction is {1}.", absentCounter, partTimeWage);
+
                     break;
             }
 
