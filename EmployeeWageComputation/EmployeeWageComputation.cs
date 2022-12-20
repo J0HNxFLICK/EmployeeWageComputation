@@ -9,44 +9,55 @@
             const int wagePerHr = 20;
             int fullDayHrs = 0;
             int partTimeHrs = 0;
-
-            //UC1 Check employee is present or absent using RANDOM
             Random random = new Random();
-            int fullTimeEmployee = random.Next(0, 2);
-            if (fullTimeEmployee == present)
+
+
+            //UC4 Solving using switch case statement
+            Console.WriteLine("Enter an option :\n1 : Full-Time Employee.\n2 : Part - Time Employee.");
+            int userChoice = Convert.ToInt32(Console.ReadLine());
+            switch (userChoice)
             {
-                Console.WriteLine("The employee is present.");
+                case 1:
+                    //UC1 Check employee is present or absent using RANDOM
+                    int fullTimeEmployee = random.Next(0, 2);
+                    if (fullTimeEmployee == present)
+                    {
+                        Console.WriteLine("The employee is present.");
 
-                fullDayHrs += 8;
+                        fullDayHrs += 8;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The Employee is absent.");
+
+                        fullDayHrs += 0;
+                    }
+
+                    //UC2 Calculate daily employee wage
+                    int fullTimeWage = wagePerHr * fullDayHrs;
+                    Console.WriteLine("Total wage is : " + fullTimeWage);
+                    break;
+
+                case 2:
+                    //UC3 Add part time employee & wage
+                    int partTimeEmployee = random.Next(0, 2);
+                    if (partTimeEmployee == present)
+                    {
+                        Console.WriteLine("The part-time employee is present.");
+
+                        partTimeHrs += 4;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The part-time employee is absent.");
+
+                        partTimeHrs += 0;
+                    }
+
+                    int partTimeWage = wagePerHr * partTimeHrs;
+                    Console.WriteLine("Total wage is : " + partTimeWage);
+                    break;
             }
-            else
-            {
-                Console.WriteLine("The Employee is absent.");
-
-                fullDayHrs += 0;
-            }
-
-            //UC2 Calculate daily employee wage
-            int fullTimeWage = wagePerHr * fullDayHrs;
-            Console.WriteLine("Total wage is : " + fullTimeWage);
-
-            //UC3 Add part time employee & wage
-            int partTimeEmployee = random.Next(0, 2);
-            if (partTimeEmployee == present)
-            {
-                Console.WriteLine("The part-time employee is present.");
-
-                partTimeHrs += 4;
-            }
-            else
-            {
-                Console.WriteLine("The part-time employee is absent.");
-
-                partTimeHrs += 0;
-            }
-
-            int partTimeWage = wagePerHr * partTimeHrs;
-            Console.WriteLine("Total wage is : " + partTimeWage);
 
         }
     }
