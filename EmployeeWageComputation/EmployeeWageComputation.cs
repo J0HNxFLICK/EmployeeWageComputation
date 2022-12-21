@@ -107,6 +107,11 @@
                     Console.WriteLine("Part-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, partTimeWage);
 
                     break;
+
+                default :
+                    Console.WriteLine("Choose a valid option.");
+                    break;
+
             }
 
         }
