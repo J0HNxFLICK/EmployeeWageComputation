@@ -13,7 +13,7 @@
             //int fullDayHrs = 0;
             //int partTimeHrs = 0;
             int absentCounter = 0;
-            int day = 1;
+            int day = 0;
             int hrs = 0;
             Random random = new Random();
 
@@ -61,7 +61,7 @@
                     }
 
                     //UC2 Calculate daily employee wage
-                    int fullTimeWage = wagePerHr * hrs;
+                    int fullTimeWage = WageCalculator(hrs);
                     Console.WriteLine("Full-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, fullTimeWage);
 
                     break;
@@ -103,7 +103,7 @@
                         }
                     }
 
-                    int partTimeWage = wagePerHr * hrs;
+                    int partTimeWage = WageCalculator(hrs);
                     Console.WriteLine("Part-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, partTimeWage);
 
                     break;
@@ -112,6 +112,12 @@
                     Console.WriteLine("Choose a valid option.");
                     break;
 
+            }
+
+            static int WageCalculator(int hours) // UC7 Calculating employee wage using class method
+            {
+                int wage = wagePerHr * hours;
+                return wage;
             }
 
         }
