@@ -2,13 +2,9 @@
 {
     internal class EmployeeWageComputation
     {
-        static void Main(string[] args)
+        static void Calculator(int wagePerHr , int minimumWorkingDays , int minimumWorkingHrs)
         {
-            Console.WriteLine("Welcome to Employee Wage Computation Program!");
             const int present = 1;
-            const int wagePerHr = 20;
-            const int minimumWorkingDays = 20;
-            const int minimumWorkingHrs = 100;
             //const int daysPerMonth = 20;
             //int fullDayHrs = 0;
             //int partTimeHrs = 0;
@@ -44,7 +40,7 @@
                     //    }
                     //}
 
-                    while (day <= minimumWorkingDays && hrs <= minimumWorkingHrs) // UC6 Calculating wages till a condition is met
+                    while (day <= minimumWorkingDays || hrs <= minimumWorkingHrs) // UC6 Calculating wages till a condition is met
                     {
                         int fullTimeEmployee = random.Next(0, 2);
                         if (fullTimeEmployee == present)
@@ -61,7 +57,7 @@
                     }
 
                     //UC2 Calculate daily employee wage
-                    int fullTimeWage = WageCalculator(hrs);
+                    int fullTimeWage = WageCalculator(wagePerHr , hrs);
                     Console.WriteLine("Full-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, fullTimeWage);
 
                     break;
@@ -87,7 +83,7 @@
                     //    }
                     //}
 
-                    while (day <= minimumWorkingDays && hrs <= minimumWorkingHrs) // UC6 Calculating wages till a condition is met
+                    while (day <= minimumWorkingDays || hrs <= minimumWorkingHrs) // UC6 Calculating wages till a condition is met
                     {
                         int partTimeEmployee = random.Next(0, 2);
                         if (partTimeEmployee == present)
@@ -103,22 +99,35 @@
                         }
                     }
 
-                    int partTimeWage = WageCalculator(hrs);
+                    int partTimeWage = WageCalculator(wagePerHr, hrs);
                     Console.WriteLine("Part-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, partTimeWage);
 
                     break;
 
-                default :
+                default:
                     Console.WriteLine("Choose a valid option.");
                     break;
 
             }
 
-            static int WageCalculator(int hours) // UC7 Calculating employee wage using class method
-            {
-                int wage = wagePerHr * hours;
-                return wage;
-            }
+        }
+
+        static int WageCalculator(int perHrRate , int hours) // UC7 Calculating employee wage using class method
+        {
+            int wage = perHrRate * hours;
+            return wage;
+        }
+
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to Employee Wage Computation Program!");
+
+            Console.WriteLine("KTM Group");
+            Calculator(30, 30, 8); // UC 8 Calculating for multiple companies
+
+            Console.WriteLine("Royal Enfield");
+            Calculator(35, 25, 7);
 
         }
     }
