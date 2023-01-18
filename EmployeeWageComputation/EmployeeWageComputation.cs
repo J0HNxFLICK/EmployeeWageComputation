@@ -1,23 +1,34 @@
 ﻿namespace EmployeeWageComputation
 {
-    internal class EmployeeWageComputation
+    internal class Calculator
     {
-        static void Calculator(int wagePerHr , int minimumWorkingDays , int minimumWorkingHrs)
+        const int present = 1;
+        int absentCounter = 0;
+        int day = 0;
+        int hrs = 0;
+        int wagePerHr = 0;
+        int minimumWorkingDays = 0;
+        int minimumWorkingHrs = 0;
+        string companyName;
+        Random random = new Random();
+
+        public Calculator(int wagePerHr, int minimumWorkingDays, int minimumWorkingHrs, string companyName) 
         {
-            const int present = 1;
-            //const int daysPerMonth = 20;
-            //int fullDayHrs = 0;
-            //int partTimeHrs = 0;
-            int absentCounter = 0;
-            int day = 0;
-            int hrs = 0;
-            Random random = new Random();
+            this.minimumWorkingDays= minimumWorkingDays; // UC9 Using instance variables
+            this.minimumWorkingHrs= minimumWorkingHrs;
+            this.companyName= companyName;
+            this.wagePerHr= wagePerHr;
+
+            brain();
+        }
 
 
-            //UC4 Solving using switch case statement
+
+        public void brain ()
+        {
             Console.WriteLine("Enter an option :\n1 : Full-Time Employee.\n2 : Part - Time Employee.");
             int userChoice = Convert.ToInt32(Console.ReadLine());
-            switch (userChoice)
+            switch (userChoice)  //UC4 Solving using switch case statement
             {
                 case 1:
 
@@ -40,7 +51,7 @@
                     //    }
                     //}
 
-                    while (day <= minimumWorkingDays || hrs <= minimumWorkingHrs) // UC6 Calculating wages till a condition is met
+                    while (day <= this.minimumWorkingDays || hrs <= this.minimumWorkingHrs) // UC6 Calculating wages till a condition is met
                     {
                         int fullTimeEmployee = random.Next(0, 2);
                         if (fullTimeEmployee == present)
@@ -57,7 +68,7 @@
                     }
 
                     //UC2 Calculate daily employee wage
-                    int fullTimeWage = WageCalculator(wagePerHr , hrs);
+                    int fullTimeWage = WageCalculator(this.wagePerHr, hrs);
                     Console.WriteLine("Full-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, fullTimeWage);
 
                     break;
@@ -83,7 +94,7 @@
                     //    }
                     //}
 
-                    while (day <= minimumWorkingDays || hrs <= minimumWorkingHrs) // UC6 Calculating wages till a condition is met
+                    while (day <= this.minimumWorkingDays || hrs <= this.minimumWorkingHrs) // UC6 Calculating wages till a condition is met
                     {
                         int partTimeEmployee = random.Next(0, 2);
                         if (partTimeEmployee == present)
@@ -99,7 +110,7 @@
                         }
                     }
 
-                    int partTimeWage = WageCalculator(wagePerHr, hrs);
+                    int partTimeWage = WageCalculator(this.wagePerHr, hrs);
                     Console.WriteLine("Part-time employee is absent for {0} day(s), total wage after minimum work requirement is {1}.", absentCounter, partTimeWage);
 
                     break;
@@ -109,25 +120,41 @@
                     break;
 
             }
-
         }
 
-        static int WageCalculator(int perHrRate , int hours) // UC7 Calculating employee wage using class method
+        static int WageCalculator(int perHrRate, int hours) // UC7 Calculating employee wage using class method
         {
             int wage = perHrRate * hours;
             return wage;
         }
+    }
+
+    internal class EmployeeWageComputation 
+    {
+
 
 
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Employee Wage Computation Program!");
 
-            Console.WriteLine("KTM Group");
-            Calculator(30, 30, 8); // UC 8 Calculating for multiple companies
+            //Console.WriteLine("KTM Group");
+            //Calculator(30, 30, 8); // UC 8 Calculating for multiple companies
 
-            Console.WriteLine("Royal Enfield");
-            Calculator(35, 25, 7);
+            //Console.WriteLine("Royal Enfield");
+            //Calculator(35, 25, 7);
+
+            Console.WriteLine("Enter company name : ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter minimum working days : ");
+            int days = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter minimum working hrs : ");
+            int hrs = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter wage per hr : ");
+            int hrlyWage = Convert.ToInt32(Console.ReadLine());
+
+            Calculator calculator = new Calculator(hrlyWage, days, hrs, name);
+
 
         }
     }
